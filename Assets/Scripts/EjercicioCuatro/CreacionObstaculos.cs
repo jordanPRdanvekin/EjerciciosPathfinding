@@ -8,7 +8,8 @@ public class CreacionObstaculos : MonoBehaviour
 {
     public NavMeshSurface superficie;
     public GameObject obstaculo;
-    // Start is called before the first frame update
+
+    
     void Start()
     {
         
@@ -19,11 +20,15 @@ public class CreacionObstaculos : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            /* TODO: Lanzar un rayo, e instanciar un obstáculo en el punto donde se golpee */
-            /* Hay que reconstruir la superficie, busca un método que se encargue de ello */
-            
-
+            Vector3 mousePos = Input.mousePosition;
+            Ray ray = Camera.main.ScreenPointToRay(mousePos);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                Instantiate(obstaculo, hit.point, Quaternion.identity);
+            }
         }
+        
     }
        
 }
